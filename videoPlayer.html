@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        video {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Header Above Video</h1>
+    </header>
+    <video id="videoPlayer" controls>
+        <source id="videoSource" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <script>
+        window.onload = function() {
+            // Function to get query parameter from URL
+            function getQueryParam(name) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(name);
+            }
+
+            // Get the video file name from the query parameter
+            var videoFileName = getQueryParam("dynasty");
+
+            // If video file name exists, set the source dynamically
+            if (videoFileName) {
+                var videoElement = document.getElementById("videoSource");
+                videoElement.src = videoFileName + '.mp4';
+
+                var videoPlayer = document.getElementById("videoPlayer");
+                videoPlayer.load(); // Reload the video player to apply the changes
+            } else {
+                console.error("No video file name provided in the URL.");
+            }
+        };
+    </script>
+</body>
+</html>
